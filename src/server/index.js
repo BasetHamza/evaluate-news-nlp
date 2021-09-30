@@ -51,7 +51,33 @@ function listening(){
     console.log(`running on localhost: ${PORT}`);
 }
 
+/* GET route that returns the projectData object */
+app.get('/all',function(req,res){
+    res.send(projectData);
+});
+
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
 
+
+/* POST route that adds incoming data to projectData */
+
+// The POST route should anticipate receiving the url from the user from the request body
+// url.
+// It should then analyze the data using the meaning cloud API and push the retruned 
+// analysis into the projectData to be returned to the app.
+
+app.post('/addData', addURL);
+
+function addURL (req, res){
+    let { url } = req.body;
+    
+    projectData.push(
+        {
+            url: url
+        }
+    );
+
+    // console.log(url);
+}
