@@ -68,14 +68,15 @@ app.get('/test', function (req, res) {
 
 app.post('/addData', analyzeURL);
 
-function analyzeURL (req, res){
+async function analyzeURL (req, res){
     let { url } = req.body;
     
-    // TODO: analyze the URL using meaning cloud
+    console.log(process.env.API_KEY)
+
     const formdata = new FormData();
     formdata.append("key", process.env.API_KEY);
     formdata.append("url", url);
-    // formdata.append("lang", "TEXT LANGUAGE HERE");  // 2-letter code, like en es fr ...
+//     formdata.append("txt", "Main dishes were quite good, but desserts were too sweet for me.");
 
     const requestOptions = {
     method: 'POST',
@@ -83,19 +84,22 @@ function analyzeURL (req, res){
     redirect: 'follow'
     };
 
-    async() =>{
-        const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-        try{
-        const data = await response.json();
+console.log(requestOptions);
 
-            console.log(data);
-console.log("Data:");
-        return data;
-    } catch(error) {
-        console.log("error",error);
-    }
 
-    }
+//     async() =>{
+//         const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
+//         try{
+//         const data = await response.json();
+
+//             console.log(data);
+// console.log("Data:");
+//         return data;
+//     } catch(error) {
+//         console.log("error",error);
+//     }
+
+//     }
 
 
     projectData.push(
