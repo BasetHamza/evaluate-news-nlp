@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8" />
-    <title>Test</title>
+    <title>Sentiment Analyzer</title>
     <!-- <link rel="stylesheet" href="/styles/resets.css" />
     <link rel="stylesheet" href="/styles/base.css" />
     <link rel="stylesheet" href="/styles/header.css" />
@@ -13,38 +13,57 @@
   <body>
     <header>
       <div class="">Logo</div>
+      <div><h1>Sentiment Analyzer</h1></div>
       <div class="">navigation</div>
     </header>
 
     <main>
       <section>
-        <form class="" onsubmit="return handleSubmit(event)">
+        <form class="" onsubmit="return Client.handleSubmit(event)">
+          <label for="input"
+            >Enter a URL of an article or a blog to discover its
+            sentiment.</label
+          >
           <input
-            id="name"
+            id="url"
             type="text"
             name="input"
             value=""
             onblur="onBlur()"
-            placeholder="Name"
+            placeholder="Enter URL here..."
           />
           <input
             type="submit"
             name=""
             value="submit"
-            onclick="return handleSubmit(event)"
-            onsubmit="return handleSubmit(event)"
+            onclick="return Client.handleSubmit(event)"
+            onsubmit="return Client.handleSubmit(event)"
           />
         </form>
       </section>
 
       <section>
         <strong>Form Results:</strong>
-        <div id="results"></div>
+        <div id="polarity"></div>
+        <div id="agreement"></div>
+        <div id="subjectivity"></div>
+        <div id="confidence"></div>
+        <div id="irony"></div>
       </section>
     </main>
 
     <footer>
       <p>This is a footer</p>
     </footer>
+
+    <script>
+      // Check that service workers are supported
+      if ("serviceWorker" in navigator) {
+        // Use the window load event to keep the page load performant
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/service-worker.js");
+        });
+      }
+    </script>
   </body>
 </html>
