@@ -15,7 +15,6 @@ function handleSubmit(event) {
          * entered by the user to the server to be analyzed.
          */
         postData('http://localhost:8081/addData', { url })
-        // .then(fetch('http://localhost:8081/test'))
         .then(
             // update the UI
             updateUI()
@@ -84,4 +83,4 @@ const postData = async ( url = '', data = {})=>{
     }
 }
 
-export { handleSubmit, updateUI, polarityResolver }
+export { handleSubmit, updateUI, polarityResolver, postData }

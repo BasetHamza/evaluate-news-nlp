@@ -77,9 +77,9 @@ async function analyzeURL (req, res){
     formdata.append("lang", "auto");
 
     const requestOptions = {
-    method: 'POST',
-    body: formdata,
-    redirect: 'follow'
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
     };
 
 
@@ -87,7 +87,6 @@ async function analyzeURL (req, res){
     try{
         const data = await response.json();
         projectData = data;
-
         return data;
     } catch(error) {
         console.log("error",error);
