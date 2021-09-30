@@ -2,16 +2,14 @@
 const dotenv = require('dotenv');
 dotenv.config();
 
+var FormData = require('form-data');
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
 /* Empty JS object to act as endpoint for all routes */
 projectData = [];
 
 var path = require('path')
 const mockAPIResponse = require('./mockAPI.js')
-
-// You could call it aylienapi, or anything else
-var textapi = {
-  application_key: process.env.API_KEY,
-};
 
 // Express to run server and routes
 const express = require('express');
@@ -68,11 +66,38 @@ app.get('/test', function (req, res) {
 // It should then analyze the data using the meaning cloud API and push the retruned 
 // analysis into the projectData to be returned to the app.
 
-app.post('/addData', addURL);
+app.post('/addData', analyzeURL);
 
-function addURL (req, res){
+function analyzeURL (req, res){
     let { url } = req.body;
     
+    // TODO: analyze the URL using meaning cloud
+    const formdata = new FormData();
+    formdata.append("key", process.env.API_KEY);
+    formdata.append("url", url);
+    // formdata.append("lang", "TEXT LANGUAGE HERE");  // 2-letter code, like en es fr ...
+
+    const requestOptions = {
+    method: 'POST',
+    body: formdata,
+    redirect: 'follow'
+    };
+
+    async() =>{
+        const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
+        try{
+        const data = await response.json();
+
+            console.log(data);
+console.log("Data:");
+        return data;
+    } catch(error) {
+        console.log("error",error);
+    }
+
+    }
+
+
     projectData.push(
         {
             url: url

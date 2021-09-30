@@ -16,7 +16,6 @@ function handleSubmit(event) {
          */
         postData('http://localhost:8081/addData', { url })
         // .then(fetch('http://localhost:8081/test'))
-        .then(res => res.json())
         .then(
             // update the UI
             updateUI()
@@ -58,8 +57,7 @@ const postData = async ( url = '', data = {})=>{
     body: JSON.stringify(data), 
     });
 
-
-console.log(response);
+    console.log(response);
     try {
         const newData = await response.json();
         console.log(newData);
