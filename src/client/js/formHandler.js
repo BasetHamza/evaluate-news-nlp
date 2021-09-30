@@ -47,15 +47,15 @@ const updateUI = async () =>{
 
 
 const polarityResolver = (score_tag) => {
-
+    
     switch(score_tag){
-        case 'P+': return 'strong positive';
-        case 'P':  return 'positive';
-        case 'NEU': return 'neutral';
-        case 'N': return 'negative';
-        case 'N+': return 'strong negative';
-        case 'NONE': return 'without polarity';
-        default: return "This is an invalid score tag!";
+        case 'P+'   : return 'strong positive';
+        case 'P'    : return 'positive';
+        case 'NEU'  : return 'neutral';
+        case 'N'    : return 'negative';
+        case 'N+'   : return 'strong negative';
+        case 'NONE' : return 'without polarity';
+        default     : return "This is an invalid score tag!";
     }
 
 }
@@ -84,4 +84,4 @@ const postData = async ( url = '', data = {})=>{
     }
 }
 
-export { handleSubmit }
+export { handleSubmit, updateUI, polarityResolver }
