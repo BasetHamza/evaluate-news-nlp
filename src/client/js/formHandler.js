@@ -54,7 +54,8 @@ const polarityResolver = (score_tag) => {
         case 'NEU': return 'neutral';
         case 'N': return 'negative';
         case 'N+': return 'strong negative';
-        case 'NONE': return 'without polarity';   
+        case 'NONE': return 'without polarity';
+        default: return "This is an invalid score tag!";
     }
 
 }

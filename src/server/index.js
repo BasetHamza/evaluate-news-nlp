@@ -92,6 +92,4 @@ async function analyzeURL (req, res){
     } catch(error) {
         console.log("error",error);
     }
-
-
 }
