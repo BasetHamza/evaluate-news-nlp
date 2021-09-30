@@ -39,10 +39,24 @@ const updateUI = async () =>{
         document.getElementById('subjectivity').innerHTML = `Subjectivity: ${analysis.subjectivity}` 
         document.getElementById('confidence').innerHTML = `Confidence: ${analysis.confidence}` 
         document.getElementById('irony').innerHTML = `Irony: ${analysis.irony}` 
-        document.getElementById('score').innerHTML = `Score Tag: ${analysis.score_tag}` 
+        document.getElementById('score').innerHTML = `Global Polarity: ${analysis.score_tag} -  ${polarityResolver(analysis.score_tag)}` 
     } catch(error){
         console.log("error",error);
     }
+}
+
+
+const polarityResolver = (score_tag) => {
+
+    switch(score_tag){
+        case 'P+': return 'strong positive';
+        case 'P':  return 'positive';
+        case 'NEU': return 'neutral';
+        case 'N': return 'negative';
+        case 'N+': return 'strong negative';
+        case 'NONE': return 'without polarity';   
+    }
+
 }
 
 const postData = async ( url = '', data = {})=>{
