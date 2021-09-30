@@ -31,13 +31,15 @@ const updateUI = async () =>{
     // Sending an async request to get all the data from the server. 
     // The returned data should include analysis of the entered url.
     const request = await fetch('http://localhost:8081/all');
-
     
     try{
-        const allData = await request.json();
-        console.log(allData);
+        const analysis = await request.json();
         
-        document.getElementById('results').innerHTML = allData
+        document.getElementById('agreement').innerHTML = `Agreement: ${analysis.agreement}`
+        document.getElementById('subjectivity').innerHTML = `Subjectivity: ${analysis.subjectivity}` 
+        document.getElementById('confidence').innerHTML = `Confidence: ${analysis.confidence}` 
+        document.getElementById('irony').innerHTML = `Irony: ${analysis.irony}` 
+        document.getElementById('score').innerHTML = `Score Tag: ${analysis.score_tag}` 
     } catch(error){
         console.log("error",error);
     }

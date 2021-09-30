@@ -70,13 +70,11 @@ app.post('/addData', analyzeURL);
 
 async function analyzeURL (req, res){
     let { url } = req.body;
-    
-    console.log(process.env.API_KEY)
 
     const formdata = new FormData();
     formdata.append("key", process.env.API_KEY);
     formdata.append("url", url);
-//     formdata.append("txt", "Main dishes were quite good, but desserts were too sweet for me.");
+    formdata.append("lang", "auto");
 
     const requestOptions = {
     method: 'POST',
@@ -84,29 +82,16 @@ async function analyzeURL (req, res){
     redirect: 'follow'
     };
 
-console.log(requestOptions);
+
+    const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
+    try{
+        const data = await response.json();
+        projectData = data;
+
+        return data;
+    } catch(error) {
+        console.log("error",error);
+    }
 
 
-//     async() =>{
-//         const response = await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-//         try{
-//         const data = await response.json();
-
-//             console.log(data);
-// console.log("Data:");
-//         return data;
-//     } catch(error) {
-//         console.log("error",error);
-//     }
-
-//     }
-
-
-    projectData.push(
-        {
-            url: url
-        }
-    );
-
-    // console.log(url);
 }
