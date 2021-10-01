@@ -33,7 +33,7 @@ const updateUI = async () =>{
     
     try{
         const analysis = await request.json();
-        
+        document.getElementById('results').innerHTML = 'The article has been analyzed successfully.'
         document.getElementById('agreement').innerHTML = `Agreement: ${analysis.agreement}`
         document.getElementById('subjectivity').innerHTML = `Subjectivity: ${analysis.subjectivity}` 
         document.getElementById('confidence').innerHTML = `Confidence: ${analysis.confidence}` 
@@ -73,7 +73,6 @@ const postData = async ( url = '', data = {})=>{
     body: JSON.stringify(data), 
     });
 
-    console.log(response);
     try {
         const newData = await response.json();
         console.log(newData);
