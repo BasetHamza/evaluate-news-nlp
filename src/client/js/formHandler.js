@@ -9,6 +9,9 @@ function handleSubmit(event) {
     if ( Client.checkURL(url) ) // Verify that the text entered is a valid url
     {
         console.log("::: Form Submitted :::")
+        
+        document.getElementById('results').innerHTML = 'Analyzing your article...'
+
 
         /*
          * Calling the async function with POST method to send the url 
@@ -33,6 +36,7 @@ const updateUI = async () =>{
     
     try{
         const analysis = await request.json();
+
         document.getElementById('results').innerHTML = 'The article has been analyzed successfully.'
         document.getElementById('agreement').innerHTML = `Agreement: ${analysis.agreement}`
         document.getElementById('subjectivity').innerHTML = `Subjectivity: ${analysis.subjectivity}` 
@@ -40,7 +44,7 @@ const updateUI = async () =>{
         document.getElementById('irony').innerHTML = `Irony: ${analysis.irony}` 
         document.getElementById('score').innerHTML = `Global Polarity: ${analysis.score_tag} -  ${polarityResolver(analysis.score_tag)}` 
     } catch(error){
-        console.log("error",error);
+        console.log("error", error);
     }
 }
 
